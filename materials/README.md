@@ -1,0 +1,1 @@
+Contains files created while following instructions found [here](https://help.f-secure.com/product.html#business/threatshield/latest/en/concept_E8E015C30E05412190F22C5DFC36AC0B-threatshield-latest-en) to create certs.
