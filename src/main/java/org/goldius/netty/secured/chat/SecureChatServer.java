@@ -28,9 +28,7 @@ public class SecureChatServer {
 
         Configuration cfg = ConfigFactory.create(Configuration.class);
 
-        InputStream keyCertChainIS = getClass().getResourceAsStream(cfg.serverCertPath());
-        InputStream keyIS = getClass().getResourceAsStream(cfg.serverKeyPath());
-        sslCtx = SslContextBuilder.forServer(keyCertChainIS, keyIS).build();
+        sslCtx = new ReloadableSslContext();
 
         EventLoopGroup bossGroup = new NioEventLoopGroup(1);
         EventLoopGroup workerGroup = new NioEventLoopGroup();

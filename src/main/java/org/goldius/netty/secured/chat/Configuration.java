@@ -17,6 +17,12 @@ public interface Configuration extends Config {
     @Key("server.key.path")
     String serverKeyPath();
 
+    @Key("server.cert.path.2")
+    String serverCertPath2();
+
+    @Key("server.key.path.2")
+    String serverKeyPath2();
+
     @Key("client.cert.path")
     String clientCertPath();
 
