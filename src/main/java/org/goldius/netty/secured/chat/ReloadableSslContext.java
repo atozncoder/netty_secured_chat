@@ -12,36 +12,37 @@ import javax.net.ssl.SSLSessionContext;
 import java.io.InputStream;
 import java.util.List;
 
+/**
+ *
+ * !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+ * This code is not thread safe and is only shown as an example of
+ * design approach and not as production ready code.
+ * !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+ *
+ * Author is not responsible for any issues caused from using this code or
+ * designing the code based on this.
+ *
+ * Anyone can use this but the user is responsible if any issue occurs
+ * based on using this code or design.
+ *
+ */
 public class ReloadableSslContext extends SslContext {
-    private int state = -1;
     private SslContext sslContext;
     private SSLEngine sslEngine;
 
     public ReloadableSslContext() throws SSLException {
-        loadContext();
+        Configuration cfg = ConfigFactory.create(Configuration.class);
+        loadContext(cfg.serverCertPath(), cfg.serverKeyPath());
     }
 
-    private void loadContext() throws SSLException {
-
-        Configuration cfg = ConfigFactory.create(Configuration.class);
-        state = (state + 1) % 2;
-
-        InputStream keyCertChainIS = null;
-        InputStream keyIS = null;
-
-        if (state == 0) {
-            keyCertChainIS = getClass().getResourceAsStream(cfg.serverCertPath());
-            keyIS =getClass().getResourceAsStream(cfg.serverKeyPath());
-        } else {
-            keyCertChainIS = getClass().getResourceAsStream(cfg.serverCertPath2());
-            keyIS =getClass().getResourceAsStream(cfg.serverKeyPath2());
-        }
-
+    private void loadContext(String certPath, String keyPath) throws SSLException {
+        InputStream keyCertChainIS = getClass().getResourceAsStream(certPath);
+        InputStream keyIS =getClass().getResourceAsStream(keyPath);
         sslContext = SslContextBuilder.forServer(keyCertChainIS, keyIS).build();
     }
 
-    public void reload() throws SSLException {
-        loadContext();
+    public void reload(String certPath, String keyPath) throws SSLException {
+        loadContext(certPath, keyPath);
     }
 
     @Override

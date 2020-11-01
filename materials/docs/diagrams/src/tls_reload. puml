@@ -1,0 +1,25 @@
+@startuml
+participant CA
+participant Client1
+participant Client2
+
+
+Client1 -> CA: CA Cert Request
+CA --> Client1: CA Cert Response
+Client1 -> Server: TLS Henshake
+Server -> Server: Load SSL context (Use Server CERT1)
+Server --> Client1: TLS Handshake
+Client1 -> Client1: Generate session key
+Server -> Server: Generate session key
+Client1 <-> Server: Encripted traffic
+Server -> Server: Change cert, use CERT2
+Client2 -> CA: CA Cert Request
+CA --> Client2: CA Cert Response
+Client2 -> Server: TLS Henshake
+Server -> Server: Load SSL context (Use Server CERT2)
+Server --> Client2: TLS Handshake
+Client2 -> Client2: Generate session key
+Server -> Server: Generate session key
+Client2 <-> Server: Encripted traffic
+
+@enduml
