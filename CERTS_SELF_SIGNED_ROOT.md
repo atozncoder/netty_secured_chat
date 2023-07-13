@@ -9,7 +9,7 @@ touch rootCA/db/db
 touch rootCA/db/db.attr
 ```
 
-2. Create a root-csr.conf configuration file. Example is in /src/main/resources/certs/root-csr.conf
+2. Create a root-csr.conf configuration file. Example is in /materials/root/root-csr.conf
 
 3. Run the following command to create a new root key and a self-signed root certificate:
 ```shell script
