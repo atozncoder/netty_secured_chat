@@ -15,14 +15,14 @@ touch CA/db/db
 touch CA/db/db.attr
 ```
 
-2. Create a CA-csr.conf configuration file. Example: /src/main/resources/certs/CA-csr.conf
+2. Create a CA-csr.conf configuration file. Example: /materials/intermidiate/CA-csr.conf
 
 3. Run the following command to create a certificate signing request with the new private key:
 ```shell script
 openssl req -new -config CA-csr.conf -out CA.csr \
         -keyout CA/private/CA.key
 ```
-4. Create a rootCA.conf: /src/main/resources/certs/rootCA.conf
+4. Create a rootCA.conf:  /materials/intermidiate/rootCA.conf
 
 5. Run the following command to sign the certificate in the request with the root certificate:
 ```shell script
